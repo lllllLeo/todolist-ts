@@ -64,3 +64,31 @@ createSlice 함수는 선언한 slice의 name에 따라서 액션 생성자, 액
 // ? { ...item, done: !item.done }
 // : item;
 // });
+
+---
+
+redux-toolkit
+
+- redux 설정의 복잡성
+- redux를 사용하기 위해 설치하는 패키지 양이 늘어나는 문제 - 구체적으로 뭐지
+- redux 내에서 작업 하나를 만들기 위해 필요한 보일러플레이트가 많은 문제ss
+
+action과 reducer를 createSlice()를 사용해 하나로 묶을 수 있다.
+reducer가 return하는 state를 편하게 수정했다. (기본으로 포함되어있는 immer.js 덕분에)
+prepare를 통해서 payload를 dynamic하게 만들 수 있다.
+createSelector()를 통해 불필요한 state의 변경을 줄일 수 있다. (re-render도 줄어든다)
+mapDispatch를 통해 action을 좀 더 깔끔하게 dispatch할 수있다.
+“feature folder” 구조로 파일을 관리하는게 기존의 방식(컴포넌트-action-reducer나누기) 보다 관리하기가 좋다.
+
+A non-serializable value was detected in the state. in the path: ~~ Value: Set e.g.(Date )
+-> 일반적으로 new를 사용해야 하는 것은 클래스 인스턴스이므로 직렬화할 수 있는 것으로 간주하지 않으며 일반 객체, 어레이 및 원시 요소만 사용할 수 있다.
+그래서 Date타입을 할 때는 일반적으로 타임스탬프 값을 문자열이나 숫자로 저장하고 필요에 따라 `Date`또는 `moment`인스턴스로 변환하는 것이 좋다.
+원하는 경우 언제든지 직렬화 체크 middleware에서 `isSerializable` 옵션을 오버라이드 할 수도 있다.
+
+링크[https://github.com/reduxjs/redux-toolkit/issues/456]
+
+모달로 info
+
+가족도 키트해야함
+
+PCR보건소 양성

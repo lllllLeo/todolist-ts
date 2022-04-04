@@ -1,15 +1,19 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-
-import TodoHeader from "./components/TodoHeader";
-import TodoList from "./components/TodoList";
-import TodoForm from "./components/TodoForm";
+import Header from "./components/Header";
+import ToDo from "./components/ToDo";
+import Block from "./models/Block";
+import { RootState } from "./store";
 
 function App() {
+  const blocks = useSelector((state: RootState) => state.block);
+
   return (
     <Container>
-      <TodoHeader />
-      <TodoList />
-      <TodoForm />
+      <Header />
+      {blocks.map((item: Block) => (
+        <ToDo key={item.id} blockId={item.id} />
+      ))}
     </Container>
   );
 }
@@ -19,7 +23,7 @@ const Container = styled.div`
   height: 100vh;
   align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 export default App;

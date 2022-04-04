@@ -1,9 +1,15 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
 
 export interface Todo {
   id: string;
-  text: string;
+  content: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  estimatedTime: string;
+  elapsedTime: string;
+  blockId: string;
 }
 const todoSlice = createSlice({
   name: "todo",
@@ -20,6 +26,14 @@ const todoSlice = createSlice({
       const filteredTodos = state.filter((item: Todo) => item.id !== id);
       localStorage.setItem("todos", JSON.stringify(filteredTodos));
       return filteredTodos;
+    },
+    setTodo(state, action: PayloadAction<any>) {
+      const reorderedItems = action.payload;
+      const blockId = reorderedItems[0].blockId;
+      const a = current(state).filter((item: Todo) => item.blockId !== blockId);
+      const todoList = [...a, ...reorderedItems];
+      localStorage.setItem("todos", JSON.stringify(todoList));
+      return todoList;
     },
   },
 });
